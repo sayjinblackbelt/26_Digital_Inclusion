@@ -1,0 +1,118 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111820">
+<title>Avaliação inicial — Informática + Office</title>
+<meta name="description" content="Avaliação inicial anônima para orientar a trilha de aprendizagem.">
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">26_Digital_Inclusion</a><div class="nav-links"><a href="../index.html#curso">Curso</a><a href="../index.html#aulas">Aulas</a><a href="../index.html#recursos">Materiais</a></div></div></nav>
+<main class="container">
+<section class="section form-shell">
+<p class="eyebrow dark-eyebrow">Diagnóstico inicial</p>
+<h1>O que você já sabe fazer no computador?</h1>
+<p class="section-intro">Esta avaliação não é uma prova. Ela serve para entendermos o ponto de partida da turma e organizar as próximas aulas.</p>
+<div class="callout"><strong>Anonimato:</strong> não informe seu nome, e-mail, telefone, senha ou qualquer dado que permita identificar você. As respostas serão usadas de forma agregada para orientar o curso.</div>
+<form id="diagnostic-form" class="diagnostic-form">
+<fieldset><legend>1. Contato com tecnologia</legend>
+<label>Com que frequência você usa computador?<select name="prior_computer_use" required><option value="">Escolha uma opção</option><option>nunca</option><option>raramente</option><option>as vezes</option><option>frequentemente</option><option>todos os dias</option></select></label>
+<label>Como você avalia sua confiança para usar computador?<select name="computer_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+<label>Mouse e teclado?<select name="mouse_keyboard_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+</fieldset>
+<fieldset><legend>2. Tarefas digitais</legend>
+<label>Arquivos e pastas?<select name="files_folders_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+<label>Internet e navegador?<select name="internet_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+<label>Editor de texto — Word, Writer ou Docs?<select name="text_editor_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+<label>Planilhas — Excel, Calc ou Sheets?<select name="spreadsheet_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+<label>Apresentações — PowerPoint, Impress ou Slides?<select name="presentation_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+<label>Nuvem e arquivos online — Drive, OneDrive etc.?<select name="cloud_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+</fieldset>
+<fieldset><legend>3. Inteligência artificial</legend>
+<label>Como você se sente usando ChatGPT?<select name="ai_chatgpt_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+<label>Como você se sente usando Gemini?<select name="ai_gemini_confidence" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+</fieldset>
+<fieldset><legend>4. Objetivo e autonomia</legend>
+<label>O que você mais gostaria de conseguir fazer com tecnologia no trabalho?<textarea name="goal_work" rows="3" maxlength="1000" placeholder="Ex.: criar um currículo, organizar uma planilha..." required></textarea></label>
+<label>O que você mais gostaria de conseguir fazer para estudos?<textarea name="goal_study" rows="3" maxlength="1000"></textarea></label>
+<label>O que você gostaria de facilitar na vida cotidiana?<textarea name="goal_personal" rows="3" maxlength="1000"></textarea></label>
+<label>Qual é hoje sua maior dificuldade com tecnologia?<textarea name="biggest_difficulty" rows="3" maxlength="1000" required></textarea></label>
+<label>Qual ferramenta você mais gostaria de aprender?<select name="priority_tool" required><option value="">Escolha uma opção</option><option>Word</option><option>Excel</option><option>PowerPoint</option><option>Writer</option><option>Calc</option><option>Impress</option><option>Google Docs</option><option>Google Sheets</option><option>Google Slides</option><option>Google Drive</option><option>ChatGPT</option><option>Gemini</option><option>outra</option></select></label>
+<label>Quanto você acredita que consegue realizar uma tarefa digital sozinho hoje?<select name="self_perceived_autonomy" required><option value="">Escolha uma opção</option><option>baixo</option><option>medio</option><option>alto</option></select></label>
+</fieldset>
+<label class="check"><input type="checkbox" name="consent_aggregate" value="true" required> Entendi que minhas respostas serão usadas apenas de forma agregada para orientar o curso e não devo informar dados pessoais.</label>
+<button class="button dark" id="submit-btn" type="submit">Enviar avaliação</button>
+<p id="status" class="form-status" aria-live="polite"></p>
+</form>
+<div id="success" class="callout hidden"><strong>Resposta registrada.</strong><br>Obrigado. Seus dados agora ajudam a orientar a próxima etapa do curso. Você pode voltar ao portal.</div>
+</section>
+</main>
+<footer><div class="container footer-inner"><p>26_Digital_Inclusion · diagnóstico anônimo</p><p><a href="../index.html">Voltar ao portal</a></p></div></footer>
+<script>
+const SUPABASE_URL = 'https://xspycvmgdlsighbvztfl.supabase.co';
+const SUPABASE_KEY = 'sb_publishable_O1NXzzr7Cy65YHXsP1KH1Q_WmMLPBlb';
+const table = 'course_diagnostic_responses';
+const form = document.getElementById('diagnostic-form');
+const status = document.getElementById('status');
+const success = document.getElementById('success');
+const button = document.getElementById('submit-btn');
+
+function clean(value) { return typeof value === 'string' ? value.trim() : value; }
+
+form.addEventListener('submit', async (event) => {
+  event.preventDefault();
+  button.disabled = true;
+  button.textContent = 'Enviando...';
+  status.textContent = '';
+  const fd = new FormData(form);
+  const payload = {
+    cycle: '2026-02',
+    prior_computer_use: clean(fd.get('prior_computer_use')),
+    computer_confidence: clean(fd.get('computer_confidence')),
+    mouse_keyboard_confidence: clean(fd.get('mouse_keyboard_confidence')),
+    files_folders_confidence: clean(fd.get('files_folders_confidence')),
+    internet_confidence: clean(fd.get('internet_confidence')),
+    text_editor_confidence: clean(fd.get('text_editor_confidence')),
+    spreadsheet_confidence: clean(fd.get('spreadsheet_confidence')),
+    presentation_confidence: clean(fd.get('presentation_confidence')),
+    cloud_confidence: clean(fd.get('cloud_confidence')),
+    ai_chatgpt_confidence: clean(fd.get('ai_chatgpt_confidence')),
+    ai_gemini_confidence: clean(fd.get('ai_gemini_confidence')),
+    goal_work: clean(fd.get('goal_work')),
+    goal_study: clean(fd.get('goal_study')),
+    goal_personal: clean(fd.get('goal_personal')),
+    biggest_difficulty: clean(fd.get('biggest_difficulty')),
+    priority_tool: clean(fd.get('priority_tool')),
+    self_perceived_autonomy: clean(fd.get('self_perceived_autonomy')),
+    consent_aggregate: true,
+    metadata: { source: 'portal_diagnostico' }
+  };
+  try {
+    const response = await fetch(`${SUPABASE_URL}/rest/v1/${table}`, {
+      method: 'POST',
+      headers: {
+        apikey: SUPABASE_KEY,
+        Authorization: `Bearer ${SUPABASE_KEY}`,
+        'Content-Type': 'application/json',
+        Prefer: 'return=minimal'
+      },
+      body: JSON.stringify(payload)
+    });
+    if (!response.ok) {
+      const detail = await response.text();
+      throw new Error(detail || `HTTP ${response.status}`);
+    }
+    form.reset();
+    form.classList.add('hidden');
+    success.classList.remove('hidden');
+  } catch (error) {
+    console.error(error);
+    status.textContent = 'Não foi possível registrar agora. Verifique a conexão e tente novamente.';
+    button.disabled = false;
+    button.textContent = 'Enviar avaliação';
+  }
+});
+</script>
+</body>
+</html>
