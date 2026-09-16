@@ -14,13 +14,12 @@
 <p class="eyebrow dark-eyebrow">Área protegida · professor</p>
 <h1>Resumo do diagnóstico</h1>
 <p class="section-intro">Esta área consulta somente dados agregados. As respostas individuais não ficam disponíveis aqui.</p>
-<form id="login-form" class="card">
+<div id="login-card" class="card">
 <h2>Acesso</h2>
-<label>E-mail<input id="email" type="email" autocomplete="email" required></label>
-<label>Senha<input id="password" type="password" autocomplete="current-password" required></label>
-<button class="button dark" type="submit">Entrar</button>
+<p>Entre usando sua conta GitHub autorizada no projeto.</p>
+<button class="button dark" id="github-login" type="button">Entrar com GitHub</button>
 <p id="login-status" class="form-status" aria-live="polite"></p>
-</form>
+</div>
 <section id="dashboard" class="hidden">
 <div class="cards dashboard-cards" id="summary-cards"></div>
 <div class="card" style="margin-top:20px"><h2>Leitura por competência</h2><div id="competencies" class="table-wrap"></div></div>
@@ -30,34 +29,39 @@
 </section>
 </main>
 <footer><div class="container footer-inner"><p>Área protegida · dados agregados</p><p><a href="../docs/privacidade.md">Privacidade</a></p></div></footer>
-<script>
+<script type="module">
 const SUPABASE_URL='https://xspycvmgdlsighbvztfl.supabase.co';
 const SUPABASE_KEY='sb_publishable_O1NXzzr7Cy65YHXsP1KH1Q_WmMLPBlb';
-const loginForm=document.getElementById('login-form');
+const loginCard=document.getElementById('login-card');
 const dashboard=document.getElementById('dashboard');
 const loginStatus=document.getElementById('login-status');
-let accessToken='';
+let supabaseClient=null;
 
-async function login(event){
-  event.preventDefault();
-  loginStatus.textContent='Entrando...';
-  const email=document.getElementById('email').value.trim();
-  const password=document.getElementById('password').value;
-  try{
-    const r=await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`,{method:'POST',headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password})});
-    const data=await r.json();
-    if(!r.ok) throw new Error(data.error_description||data.msg||'Acesso não autorizado');
-    accessToken=data.access_token;
-    loginForm.classList.add('hidden');
-    dashboard.classList.remove('hidden');
-    await loadSummary();
-  }catch(error){loginStatus.textContent='Não foi possível entrar. Confira suas credenciais.';}
+function setStatus(message){loginStatus.textContent=message||'';}
+
+async function loadSupabase(){
+  if(supabaseClient) return supabaseClient;
+  const mod=await import('https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2/+esm');
+  supabaseClient=mod.createClient(SUPABASE_URL,SUPABASE_KEY);
+  return supabaseClient;
 }
 
-async function loadSummary(){
+async function signInWithGithub(){
+  setStatus('Redirecionando para o GitHub...');
+  try{
+    const supabase=await loadSupabase();
+    const {error}=await supabase.auth.signInWithOAuth({
+      provider:'github',
+      options:{redirectTo:window.location.href}
+    });
+    if(error) throw error;
+  }catch(error){setStatus(error.message||'Não foi possível iniciar o acesso com GitHub.');}
+}
+
+async function loadSummary(accessToken){
   const r=await fetch(`${SUPABASE_URL}/functions/v1/course-diagnostic-summary`,{headers:{Authorization:`Bearer ${accessToken}`,apikey:SUPABASE_KEY}});
   const data=await r.json();
-  if(!r.ok) throw new Error(data.error||'Erro ao carregar resumo');
+  if(!r.ok) throw new Error(data.error||'Acesso não autorizado');
   render(data.data||[]);
 }
 
@@ -77,8 +81,38 @@ function render(rows){
   document.getElementById('cycles').innerHTML=rows.length?`<table class="table"><thead><tr><th>Ciclo</th><th>Respostas</th><th>Autonomia média</th><th>Ferramenta prioritária</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${x.cycle}</td><td>${x.responses}</td><td>${x.autonomy_avg??'—'}</td><td>${x.priority_tool_mode||'—'}</td></tr>`).join('')}</tbody></table>`:'—';
 }
 
-loginForm.addEventListener('submit',login);
-document.getElementById('logout').addEventListener('click',()=>{accessToken='';dashboard.classList.add('hidden');loginForm.classList.remove('hidden');loginForm.reset();loginStatus.textContent='Sessão encerrada.';});
+async function showSession(session){
+  if(!session) return;
+  loginCard.classList.add('hidden');
+  dashboard.classList.remove('hidden');
+  setStatus('');
+  try{
+    await loadSummary(session.access_token);
+  }catch(error){
+    dashboard.classList.add('hidden');
+    loginCard.classList.remove('hidden');
+    setStatus(error.message||'Sua conta GitHub não está autorizada como professor.');
+  }
+}
+
+async function init(){
+  try{
+    const supabase=await loadSupabase();
+    const {data:{session}}=await supabase.auth.getSession();
+    await showSession(session);
+    supabase.auth.onAuthStateChange((_event,newSession)=>{showSession(newSession);});
+  }catch(error){setStatus(error.message||'Não foi possível inicializar o acesso.');}
+}
+
+document.getElementById('github-login').addEventListener('click',signInWithGithub);
+document.getElementById('logout').addEventListener('click',async()=>{
+  if(supabaseClient) await supabaseClient.auth.signOut();
+  dashboard.classList.add('hidden');
+  loginCard.classList.remove('hidden');
+  setStatus('Sessão encerrada.');
+});
+
+init();
 </script>
 </body>
 </html>
