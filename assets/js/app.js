@@ -1,10 +1,13 @@
 document.addEventListener('DOMContentLoaded',()=>{
   document.documentElement.classList.add('js');
 
-  const polish='assets/css/polish.css';
-  if(!document.querySelector(`link[href="${polish}"]`)){
+  const script=document.querySelector('script[src*="assets/js/app.js"]');
+  const base=script?script.src.replace(/assets\/js\/app\.js(?:\?.*)?$/,''):'';
+  const polish=base+'assets/css/polish.css';
+  if(!document.querySelector('link[data-ui-polish]')){
     const link=document.createElement('link');
     link.rel='stylesheet';
+    link.dataset.uiPolish='true';
     link.href=polish;
     document.head.appendChild(link);
   }
