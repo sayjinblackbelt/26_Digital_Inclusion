@@ -3,51 +3,71 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <title>Digital Inclusion — Informática Básica</title>
-  <meta name="description" content="Portal público de apoio ao curso de inclusão digital, informática básica e ferramentas de produtividade.">
+  <meta name="theme-color" content="#111820">
+  <title>26_Digital_Inclusion — Informática Básica</title>
+  <meta name="description" content="Portal público de apoio a um ciclo de informática básica, produtividade e autonomia digital.">
   <link rel="stylesheet" href="assets/css/style.css">
 </head>
 <body>
+<nav class="nav">
+  <div class="container nav-inner">
+    <a class="brand" href="index.html">26_Digital_Inclusion</a>
+    <div class="nav-links">
+      <a href="#curso">Curso</a><a href="#aulas">Aulas</a><a href="#materiais">Materiais</a><a href="docs/sobre-o-curso.md">Sobre</a>
+    </div>
+  </div>
+</nav>
 <header class="hero">
   <div class="container">
-    <p class="eyebrow">26_Digital_Inclusion</p>
+    <p class="eyebrow">Portal público de aprendizagem</p>
     <h1>Informática Básica e Ferramentas de Produtividade</h1>
-    <p class="lead">Aprender tecnologia para fazer coisas úteis na vida, nos estudos e no trabalho.</p>
-    <a class="button" href="#aulas">Ver aulas</a>
+    <p class="lead">Aprender tecnologia para fazer coisas úteis na vida, nos estudos e no trabalho — com prática, adaptação e autonomia.</p>
+    <a class="button" href="#aulas">Entrar nas aulas</a>
   </div>
 </header>
 <main class="container">
-  <section class="card">
-    <h2>Sobre o curso</h2>
-    <p>Este projeto acompanha um ciclo de aprendizagem prática em informática, com foco em inclusão digital, autonomia, organização, comunicação e aplicações do dia a dia.</p>
-    <p><strong>Regra do projeto:</strong> aprender fazendo, avançar no ritmo da turma e transformar tecnologia em ferramenta para resolver situações reais.</p>
+  <section id="curso" class="section">
+    <h2>O curso em uma ideia</h2>
+    <p class="section-intro">Este é um ciclo de 12 aulas baseado em experiência pedagógica acumulada. O histórico orienta, mas não determina: a nova turma é observada e o caminho é ajustado conforme a aprendizagem real.</p>
+    <div class="cards">
+      <div class="stat"><strong>12</strong><span>aulas no ciclo</span></div>
+      <div class="stat"><strong>Prática</strong><span>aprender fazendo</span></div>
+      <div class="stat"><strong>Autonomia</strong><span>usar sem depender sempre de ajuda</span></div>
+      <div class="stat"><strong>Vida · Estudos · Trabalho</strong><span>situações reais como referência</span></div>
+    </div>
+    <div class="callout" style="margin-top:16px"><strong>Como avançamos:</strong> Planejar → Ensinar → Observar → Registrar → Analisar → Ajustar.</div>
   </section>
-  <section id="aulas">
+
+  <section class="section">
+    <h2>O percurso</h2>
+    <p class="section-intro">A sequência abaixo é uma referência inicial. Depois do diagnóstico, conteúdos podem ser reforçados, reorganizados ou substituídos.</p>
+    <div class="path"><span>Computador</span><span>Arquivos</span><span>Documentos</span><span>Apresentações</span><span>Planilhas</span><span>Aplicações práticas</span></div>
+  </section>
+
+  <section id="aulas" class="section">
     <h2>12 aulas</h2>
     <div class="grid">
-      <a class="lesson" href="aulas/aula-01.html"><span>Aula 01</span><strong>Apresentação e exploração</strong><small>Conhecer o curso e explorar o computador.</small></a>
-      <div class="lesson muted"><span>Aula 02</span><strong>Em construção</strong><small>Conteúdo definido a partir do diagnóstico.</small></div>
-      <div class="lesson muted"><span>Aula 03</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 04</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 05</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 06</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 07</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 08</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 09</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 10</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 11</span><strong>Em construção</strong></div>
-      <div class="lesson muted"><span>Aula 12</span><strong>Em construção</strong></div>
+      <a class="lesson active" href="aulas/aula-01.html"><span class="num">Aula 01</span><strong>Apresentação e exploração</strong><small>Conhecer o curso e explorar livremente o computador e a internet.</small><span class="tag">Disponível</span></a>
+      <a class="lesson" href="aulas/aula-02.html"><span class="num">Aula 02</span><strong>Diagnóstico convertido em prática</strong><small>Escolha das primeiras habilidades a reforçar a partir da Aula 01.</small><span class="tag">Flexível</span></a>
+      <a class="lesson" href="aulas/aula-03.html"><span class="num">Aula 03</span><strong>Organização digital</strong><small>Arquivos, pastas e localização, conforme necessidade observada.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-04.html"><span class="num">Aula 04</span><strong>Digitação e texto</strong><small>Produção de texto com progressão gradual.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-05.html"><span class="num">Aula 05</span><strong>Documentos práticos</strong><small>Uso do editor de texto em situações concretas.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-06.html"><span class="num">Aula 06</span><strong>Formatação e revisão</strong><small>Organizar, revisar e melhorar um documento.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-07.html"><span class="num">Aula 07</span><strong>Apresentações</strong><small>Estrutura e leitura visual de uma apresentação.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-08.html"><span class="num">Aula 08</span><strong>Produção de apresentação</strong><small>Planejar e criar uma apresentação simples.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-09.html"><span class="num">Aula 09</span><strong>Planilhas</strong><small>Organizar informações em linhas, colunas e tabelas.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-10.html"><span class="num">Aula 10</span><strong>Cálculos e dados</strong><small>Trabalhar com cálculos simples e leitura de dados.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-11.html"><span class="num">Aula 11</span><strong>Aplicação para a vida e o trabalho</strong><small>Combinar habilidades em uma tarefa com finalidade real.</small><span class="tag">Planejamento</span></a>
+      <a class="lesson" href="aulas/aula-12.html"><span class="num">Aula 12</span><strong>Projeto e autonomia</strong><small>Revisão, produção final e percepção de evolução.</small><span class="tag">Planejamento</span></a>
     </div>
   </section>
-  <section class="card">
-    <h2>Materiais</h2>
-    <p>Guias, atividades, modelos e outros recursos serão disponibilizados conforme o curso avançar.</p>
-  </section>
-  <section class="card privacy">
-    <h2>Privacidade</h2>
-    <p>Este portal utiliza somente informações pedagógicas sanitizadas. Não publicamos nomes, notas, frequência individual, diagnósticos pessoais, contatos ou outros dados que identifiquem participantes.</p>
+
+  <section id="materiais" class="section cards">
+    <div class="card"><h2>Materiais</h2><p>Guias, exercícios e modelos entram no portal conforme forem necessários para a turma.</p><a class="button dark" href="materiais/">Abrir materiais</a></div>
+    <div class="card"><h2>Metodologia</h2><p>O foco é a progressão da dependência para a autonomia, com demonstração, prática, observação e adaptação.</p><a class="button dark" href="docs/metodologia.md">Ler metodologia</a></div>
+    <div class="card"><h2>Privacidade</h2><p>O portal público não deve expor dados pessoais ou registros identificáveis dos participantes.</p><a class="button dark" href="docs/privacidade.md">Ver política</a></div>
   </section>
 </main>
-<footer><div class="container"><p>26_Digital_Inclusion · Projeto de inclusão digital</p></div></footer>
+<footer><div class="container footer-inner"><p>26_Digital_Inclusion · conteúdo pedagógico público e sanitizado</p><p><a href="docs/historico-sanitizado.md">Histórico</a> · <a href="docs/sobre-o-curso.md">Sobre o curso</a></p></div></footer>
 </body>
 </html>
