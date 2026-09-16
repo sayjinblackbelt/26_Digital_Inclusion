@@ -1,0 +1,83 @@
+<!doctype html>
+<html lang="pt-BR">
+<head>
+<meta charset="utf-8"><meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="theme-color" content="#111820">
+<title>Painel do professor — Diagnóstico</title>
+<link rel="stylesheet" href="../assets/css/style.css">
+</head>
+<body>
+<nav class="nav"><div class="container nav-inner"><a class="brand" href="../index.html">26_Digital_Inclusion</a><div class="nav-links"><a href="../index.html">Portal</a><a href="../diagnostico/">Avaliação</a></div></div></nav>
+<main class="container">
+<section class="section form-shell">
+<p class="eyebrow dark-eyebrow">Área do professor</p>
+<h1>Resumo do diagnóstico</h1>
+<p class="section-intro">Esta área consulta somente dados agregados. As respostas individuais não ficam disponíveis aqui.</p>
+<form id="login-form" class="card">
+<h2>Acesso</h2>
+<label>E-mail<input id="email" type="email" autocomplete="email" required></label>
+<label>Senha<input id="password" type="password" autocomplete="current-password" required></label>
+<button class="button dark" type="submit">Entrar</button>
+<p id="login-status" class="form-status" aria-live="polite"></p>
+</form>
+<section id="dashboard" class="hidden">
+<div class="cards dashboard-cards" id="summary-cards"></div>
+<div class="card" style="margin-top:20px"><h2>Leitura por competência</h2><div id="competencies" class="table-wrap"></div></div>
+<div class="card" style="margin-top:20px"><h2>Ciclos</h2><div id="cycles" class="table-wrap"></div></div>
+<button class="button" id="logout" type="button">Sair</button>
+</section>
+</section>
+</main>
+<footer><div class="container footer-inner"><p>Área protegida · dados agregados</p><p><a href="../docs/privacidade.md">Privacidade</a></p></div></footer>
+<script>
+const SUPABASE_URL='https://xspycvmgdlsighbvztfl.supabase.co';
+const SUPABASE_KEY='sb_publishable_O1NXzzr7Cy65YHXsP1KH1Q_WmMLPBlb';
+const loginForm=document.getElementById('login-form');
+const dashboard=document.getElementById('dashboard');
+const loginStatus=document.getElementById('login-status');
+let accessToken='';
+
+async function login(event){
+  event.preventDefault();
+  loginStatus.textContent='Entrando...';
+  const email=document.getElementById('email').value.trim();
+  const password=document.getElementById('password').value;
+  try{
+    const r=await fetch(`${SUPABASE_URL}/auth/v1/token?grant_type=password`,{method:'POST',headers:{apikey:SUPABASE_KEY,'Content-Type':'application/json'},body:JSON.stringify({email,password})});
+    const data=await r.json();
+    if(!r.ok) throw new Error(data.error_description||data.msg||'Acesso não autorizado');
+    accessToken=data.access_token;
+    loginForm.classList.add('hidden');
+    dashboard.classList.remove('hidden');
+    await loadSummary();
+  }catch(error){loginStatus.textContent='Não foi possível entrar. Confira suas credenciais.';}
+}
+
+async function loadSummary(){
+  const r=await fetch(`${SUPABASE_URL}/functions/v1/course-diagnostic-summary`,{headers:{Authorization:`Bearer ${accessToken}`,apikey:SUPABASE_KEY}});
+  const data=await r.json();
+  if(!r.ok) throw new Error(data.error||'Erro ao carregar resumo');
+  render(data.data||[]);
+}
+
+function pct(value){return value===null||value===undefined?'—':`${value}%`;}
+function render(rows){
+  const latest=rows.length?rows[rows.length-1]:null;
+  const cards=document.getElementById('summary-cards');
+  cards.innerHTML=latest?`
+    <div class="stat"><strong>${latest.responses}</strong><span>respostas no ciclo ${latest.cycle}</span></div>
+    <div class="stat"><strong>${pct(latest.pct_text_low)}</strong><span>baixa autoconfiança em textos</span></div>
+    <div class="stat"><strong>${pct(latest.pct_spreadsheet_low)}</strong><span>baixa autoconfiança em planilhas</span></div>
+    <div class="stat"><strong>${pct(latest.pct_cloud_low)}</strong><span>baixa autoconfiança em nuvem</span></div>
+    <div class="stat"><strong>${latest.autonomy_avg??'—'}</strong><span>média de autonomia percebida</span></div>
+    <div class="stat"><strong>${latest.priority_tool||'—'}</strong><span>ferramenta mais indicada</span></div>`:'<div class="callout">Ainda não há respostas registradas.</div>';
+  const labels=[['computer_confidence','Computador','pct_computer_low'],['files_folders_confidence','Arquivos e pastas','pct_files_low'],['text_editor_confidence','Texto','pct_text_low'],['spreadsheet_confidence','Planilhas','pct_spreadsheet_low'],['presentation_confidence','Apresentações','pct_presentation_low'],['cloud_confidence','Nuvem','pct_cloud_low'],['ai_chatgpt_confidence','ChatGPT','pct_chatgpt_low'],['ai_gemini_confidence','Gemini','pct_gemini_low']];
+  document.getElementById('competencies').innerHTML=latest?`<table class="table"><thead><tr><th>Competência</th><th>Baixo</th></tr></thead><tbody>${labels.map(x=>`<tr><td>${x[1]}</td><td>${pct(latest[x[2]])}</td></tr>`).join('')}</tbody></table>`:'—';
+  document.getElementById('cycles').innerHTML=rows.length?`<table class="table"><thead><tr><th>Ciclo</th><th>Respostas</th><th>Autonomia média</th><th>Ferramenta prioritária</th></tr></thead><tbody>${rows.map(x=>`<tr><td>${x.cycle}</td><td>${x.responses}</td><td>${x.autonomy_avg??'—'}</td><td>${x.priority_tool_mode||'—'}</td></tr>`).join('')}</tbody></table>`:'—';
+}
+
+loginForm.addEventListener('submit',login);
+document.getElementById('logout').addEventListener('click',()=>{accessToken='';dashboard.classList.add('hidden');loginForm.classList.remove('hidden');loginForm.reset();loginStatus.textContent='Sessão encerrada.';});
+</script>
+</body>
+</html>
