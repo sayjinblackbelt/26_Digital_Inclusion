@@ -1,6 +1,14 @@
 document.addEventListener('DOMContentLoaded',()=>{
   document.documentElement.classList.add('js');
 
+  const polish='assets/css/polish.css';
+  if(!document.querySelector(`link[href="${polish}"]`)){
+    const link=document.createElement('link');
+    link.rel='stylesheet';
+    link.href=polish;
+    document.head.appendChild(link);
+  }
+
   document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
     const id=a.getAttribute('href');
     if(id&&id.length>1){const el=document.querySelector(id);if(el){e.preventDefault();el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});history.replaceState(null,'',id);}}}));
@@ -27,10 +35,15 @@ document.addEventListener('DOMContentLoaded',()=>{
     const panel=document.createElement('div');
     panel.className='callout';
     panel.id='learning-progress';
-    const updatePanel=()=>{
+    const updatePanel=(flash=false)=>{
       const done=cards.filter(card=>progress[card.getAttribute('href')]).length;
       const pct=Math.round((done/cards.length)*100);
       panel.innerHTML=`<strong>Seu progresso:</strong> ${done} de ${cards.length} aulas visitadas · ${pct}%<br><small>Registro local deste dispositivo; nenhum dado é enviado ao servidor.</small>`;
+      if(flash){
+        panel.classList.remove('updated');
+        requestAnimationFrame(()=>panel.classList.add('updated'));
+        window.setTimeout(()=>panel.classList.remove('updated'),700);
+      }
     };
     updatePanel();
     const grid=cards[0].parentElement;
@@ -43,7 +56,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         progress[href]=new Date().toISOString();
         writeProgress(progress);
         card.classList.add('completed');
-        updatePanel();
+        updatePanel(true);
       });
       card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.click()}});
     });
