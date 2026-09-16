@@ -14,7 +14,7 @@ document.addEventListener('DOMContentLoaded',()=>{
     panel.style.margin='0 0 28px';
     const updatePanel=()=>{
       const done=cards.filter(card=>progress[card.getAttribute('href')]).length;
-      panel.innerHTML=`<strong>Progresso local:</strong> ${done} de ${cards.length} aulas marcadas como concluídas. Este registro fica apenas neste dispositivo e não envia dados ao servidor.`;
+      panel.innerHTML=`<strong>Progresso local:</strong> ${done} de ${cards.length} aulas visitadas. Este registro fica apenas neste dispositivo e não envia dados ao servidor.`;
     };
     updatePanel();
     const grid=cards[0].parentElement;
@@ -22,25 +22,12 @@ document.addEventListener('DOMContentLoaded',()=>{
 
     cards.forEach(card=>{
       const href=card.getAttribute('href');
-      const tag=card.querySelector('.tag');
-      const button=document.createElement('button');
-      button.type='button';
-      button.className='tag progress-toggle';
-      button.textContent=progress[href]?'Concluída ✓':'Marcar concluída';
-      button.setAttribute('aria-pressed',String(Boolean(progress[href])));
-      button.addEventListener('click',event=>{
-        event.preventDefault();
-        event.stopPropagation();
-        if(progress[href])delete progress[href];else progress[href]=new Date().toISOString();
+      if(progress[href])card.classList.add('completed');
+      card.addEventListener('click',()=>{
+        progress[href]=new Date().toISOString();
         writeProgress(progress);
-        const done=Boolean(progress[href]);
-        button.textContent=done?'Concluída ✓':'Marcar concluída';
-        button.setAttribute('aria-pressed',String(done));
-        card.classList.toggle('completed',done);
-        updatePanel();
+        card.classList.add('completed');
       });
-      card.classList.toggle('completed',Boolean(progress[href]));
-      if(tag)tag.replaceWith(button);else card.appendChild(button);
       card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.click()}});
     });
   }
