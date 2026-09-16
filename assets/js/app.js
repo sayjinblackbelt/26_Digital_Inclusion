@@ -1,9 +1,25 @@
 document.addEventListener('DOMContentLoaded',()=>{
-  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',()=>{const id=a.getAttribute('href');if(id&&id.length>1){const el=document.querySelector(id);if(el)el.scrollIntoView({behavior:'smooth'})}}));
+  document.documentElement.classList.add('js');
+
+  document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
+    const id=a.getAttribute('href');
+    if(id&&id.length>1){const el=document.querySelector(id);if(el){e.preventDefault();el.scrollIntoView({behavior:window.matchMedia('(prefers-reduced-motion: reduce)').matches?'auto':'smooth',block:'start'});history.replaceState(null,'',id);}}}));
+
+  const sections=[...document.querySelectorAll('main section[id]')];
+  const navLinks=[...document.querySelectorAll('.nav-links a[href^="#"]')];
+  if(sections.length&&navLinks.length&&'IntersectionObserver' in window){
+    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{
+      if(!entry.isIntersecting)return;
+      navLinks.forEach(link=>link.removeAttribute('aria-current'));
+      const active=navLinks.find(link=>link.getAttribute('href')==='#'+entry.target.id);
+      if(active)active.setAttribute('aria-current','page');
+    }),{rootMargin:'-25% 0px -60% 0px',threshold:0});
+    sections.forEach(section=>observer.observe(section));
+  }
 
   const progressKey='26_Digital_Inclusion_progress_v1';
   const readProgress=()=>{try{return JSON.parse(localStorage.getItem(progressKey)||'{}')}catch{return{}}};
-  const writeProgress=data=>localStorage.setItem(progressKey,JSON.stringify(data));
+  const writeProgress=data=>{try{localStorage.setItem(progressKey,JSON.stringify(data))}catch{}};
   const cards=[...document.querySelectorAll('.lesson[href*="aula-"]')];
 
   if(cards.length){
@@ -11,10 +27,10 @@ document.addEventListener('DOMContentLoaded',()=>{
     const panel=document.createElement('div');
     panel.className='callout';
     panel.id='learning-progress';
-    panel.style.margin='0 0 28px';
     const updatePanel=()=>{
       const done=cards.filter(card=>progress[card.getAttribute('href')]).length;
-      panel.innerHTML=`<strong>Progresso local:</strong> ${done} de ${cards.length} aulas visitadas. Este registro fica apenas neste dispositivo e não envia dados ao servidor.`;
+      const pct=Math.round((done/cards.length)*100);
+      panel.innerHTML=`<strong>Seu progresso:</strong> ${done} de ${cards.length} aulas visitadas · ${pct}%<br><small>Registro local deste dispositivo; nenhum dado é enviado ao servidor.</small>`;
     };
     updatePanel();
     const grid=cards[0].parentElement;
@@ -27,6 +43,7 @@ document.addEventListener('DOMContentLoaded',()=>{
         progress[href]=new Date().toISOString();
         writeProgress(progress);
         card.classList.add('completed');
+        updatePanel();
       });
       card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.click()}});
     });
