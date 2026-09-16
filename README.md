@@ -28,9 +28,12 @@ O ciclo está organizado em **12 aulas**. A estrutura apresenta um caminho inici
 
 - 📚 Aulas e roteiros de aprendizagem
 - 🧩 Atividades práticas e exercícios
+- 🎯 Missões e desafios sem ranking entre alunos
 - 📝 Guias e modelos
+- 📁 Portfólio de aprendizagem
 - 🛠️ Projetos e aplicações
 - 🔎 Recursos complementares
+- 📊 Critérios de avaliação
 - 🧠 Metodologia e princípios pedagógicos
 - 📖 Histórico pedagógico sanitizado
 
@@ -47,6 +50,12 @@ A aprendizagem é construída por demonstração, prática, repetição signific
 ### Progressão de autonomia
 
 **Não conhece → conhece com ajuda → executa com instruções → executa com pouca ajuda → executa sozinho → aplica em outra situação → consegue explicar ou ensinar**
+
+## Jornada do aluno
+
+**Explorar → Praticar → Tentar sozinho → Aplicar → Registrar a evolução**
+
+O portal não é uma prova. Errar, voltar, experimentar e pedir ajuda fazem parte do processo.
 
 ## Histórico pedagógico
 
@@ -78,6 +87,17 @@ Consulte [`docs/privacidade.md`](docs/privacidade.md).
 ├── assets/
 └── .github/workflows/
 ```
+
+## Documentação principal
+
+- [`docs/metodologia.md`](docs/metodologia.md)
+- [`docs/roteiro-de-aulas.md`](docs/roteiro-de-aulas.md)
+- [`docs/jornada-do-aluno.md`](docs/jornada-do-aluno.md)
+- [`docs/avaliacao.md`](docs/avaliacao.md)
+- [`docs/privacidade.md`](docs/privacidade.md)
+- [`docs/historico-do-ciclo.md`](docs/historico-do-ciclo.md)
+- [`projetos/missoes.md`](projetos/missoes.md)
+- [`projetos/portfolio.md`](projetos/portfolio.md)
 
 ## Educador
 
