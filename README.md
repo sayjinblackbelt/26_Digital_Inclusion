@@ -1,109 +1,121 @@
 # 26_Digital_Inclusion
 
-Projeto público de inclusão digital com foco em informática básica, ferramentas de produtividade, autonomia tecnológica e desenvolvimento de habilidades para a vida, os estudos e o trabalho.
+Projeto público de **inclusão digital, produtividade e autonomia tecnológica**, organizado para transformar conhecimentos de informática em competências aplicáveis à vida, aos estudos e ao trabalho.
 
-## 🌐 GitHub Pages — Portal do Curso
+## 🌐 Portal de aprendizagem
 
-> **[🚀 ACESSAR O PORTAL DO CURSO](https://sayjinblackbelt.github.io/26_Digital_Inclusion/)**
->
-> Aulas, materiais, atividades, projetos e recursos organizados em um único espaço público.
+**[🚀 Acessar o GitHub Pages](https://sayjinblackbelt.github.io/26_Digital_Inclusion/)**
 
-O portal é atualizado conforme o ciclo avança e o planejamento é ajustado a partir da aprendizagem observada.
+Arquitetura do percurso:
 
-## Sobre o projeto
+**Aprender → Praticar → Desafiar → Consultar → Acompanhar → Transferir**
 
-Este repositório reúne materiais pedagógicos, atividades, recursos públicos e registros históricos sanitizados de um ciclo de formação em inclusão digital.
+## 🎯 Objetivo
 
-O projeto parte de experiência acumulada, mas não repete automaticamente o que foi feito antes. O diagnóstico da nova turma orienta o percurso.
+Desenvolver competências digitais práticas a partir de situações reais, usando ferramentas de produtividade e inteligência artificial sem transformar a ferramenta no objetivo final.
 
-**Princípio central:** não começar do zero, não repetir automaticamente, aprender com o que já foi vivido e adaptar o caminho à realidade da nova turma.
+**Ferramenta → Habilidade → Tarefa → Finalidade → Situação real**
 
-## Percurso atual
+## 🧭 Percurso atual
 
-O ciclo está organizado em **12 aulas**. A estrutura apresenta um caminho inicial, mas a ordem e a profundidade dos conteúdos podem ser ajustadas conforme conhecimento prévio, dificuldades, participação, autonomia e evolução da turma.
+| Aula | Foco |
+|---|---|
+| 01 | Conhecer e explorar |
+| 02 | Arquivos e pastas |
+| 03 | Organizar, mover e recuperar |
+| 04 | Digitação e produção de texto |
+| 05 | Documentos profissionais |
+| 06 | Revisão e formatação |
+| 07 | Apresentações digitais |
+| 08 | Produção de apresentação |
+| 09 | Planilhas |
+| 10 | Cálculos e leitura de dados |
+| 11 | Nuvem, IA e trabalho |
+| 12 | Projeto de empregabilidade |
 
-**Planejamento → Execução → Observação → Análise → Ajuste → Próxima aula**
+O percurso é adaptativo:
 
-## O que o portal oferece
+**Planejar → Executar → Observar → Analisar → Ajustar → Avançar**
 
-- 📚 Aulas e roteiros de aprendizagem
-- 🧩 Atividades práticas e exercícios
-- 🎯 Missões e desafios sem ranking entre alunos
-- 📝 Guias e modelos
-- 📁 Portfólio de aprendizagem
-- 🛠️ Projetos e aplicações
-- 🔎 Recursos complementares
-- 📊 Critérios de avaliação
-- 🧠 Metodologia e princípios pedagógicos
-- 📖 Histórico pedagógico sanitizado
+## 🧩 Arquitetura do portal
 
-## Princípios pedagógicos
+- **Aulas:** aprendizagem guiada — Entenda → Veja → Faça → Tente → Aplique → Conclua.
+- **Exercícios:** Situação → Tarefa → Evidência.
+- **Desafios:** problemas abertos em níveis guiado, estratégico e autônomo.
+- **Materiais:** biblioteca de apoio e referências.
+- **Glossário:** vocabulário funcional de informática.
+- **Progresso:** acompanhamento local da jornada de aprendizagem.
+- **Diagnóstico:** ponto de partida para adaptar o percurso.
+- **Área do professor:** recursos de acompanhamento e análise.
 
-**Tecnologia → Aprendizagem → Autonomia → Inclusão → Participação social → Empregabilidade**
+## 🧠 Progressão de autonomia
 
-Sempre que possível:
+**Não conhece → conhece com ajuda → executa com instruções → executa com pouca ajuda → executa sozinho → aplica em outra situação → explica ou ensina**
 
-**Ferramenta → Tarefa → Finalidade → Situação real**
+Concluir uma atividade não significa automaticamente domínio. A evidência mais importante é conseguir reutilizar a competência em outra situação.
 
-A aprendizagem é construída por demonstração, prática, repetição significativa, contextualização, progressão gradual e redução progressiva da dependência do professor.
+## 🤖 IA com autoria
 
-### Progressão de autonomia
+Princípio:
 
-**Não conhece → conhece com ajuda → executa com instruções → executa com pouca ajuda → executa sozinho → aplica em outra situação → consegue explicar ou ensinar**
+**Entender → Perguntar → Conferir → Adaptar → Assumir a autoria**
 
-## Jornada do aluno
+Ferramentas trabalhadas incluem ChatGPT, Gemini, Microsoft Office, LibreOffice e Google Workspace.
 
-**Explorar → Praticar → Tentar sozinho → Aplicar → Registrar a evolução**
+## 🧪 Diagnóstico e adaptação
 
-O portal não é uma prova. Errar, voltar, experimentar e pedir ajuda fazem parte do processo.
+**Diagnóstico → Hipótese → Atividade → Evidência → Análise → Ajuste**
 
-## Histórico pedagógico
+O histórico pedagógico informa, mas não determina a nova turma. O planejamento pode ser reforçado, reorganizado ou aprofundado conforme as evidências.
 
-As experiências anteriores funcionam como referência para identificar estratégias que deram resultado, dificuldades recorrentes e oportunidades de melhoria.
+## 🗂️ Estrutura
 
-A nova turma, entretanto, é observada como uma realidade própria. O histórico informa; o diagnóstico orienta; a aula produz evidências; o planejamento é ajustado.
-
-## Privacidade e dados sanitizados
-
-Este repositório é público. Portanto, **não devem ser publicados dados pessoais identificáveis de participantes**.
-
-Não publicar nomes, contatos, documentos pessoais, notas individuais, frequência individual identificável, diagnósticos pessoais, informações socioeconômicas individuais, fotografias identificáveis sem autorização adequada, credenciais ou tokens.
-
-Os registros públicos devem utilizar somente informações agregadas, anonimizadas ou sanitizadas.
-
-Consulte [`docs/privacidade.md`](docs/privacidade.md).
-
-## Estrutura
-
-```text
+\`\`\`text
 26_Digital_Inclusion/
-├── README.md
 ├── index.html
 ├── aulas/
+├── exercicios/
+├── desafios/
 ├── materiais/
+├── glossario/
+├── progresso/
+├── diagnostico/
+├── professor/
+├── dashboard/
 ├── projetos/
 ├── recursos/
 ├── docs/
 ├── assets/
 └── .github/workflows/
-```
+\`\`\`
 
-## Documentação principal
+## 📚 Documentação
 
-- [`docs/metodologia.md`](docs/metodologia.md)
-- [`docs/roteiro-de-aulas.md`](docs/roteiro-de-aulas.md)
-- [`docs/jornada-do-aluno.md`](docs/jornada-do-aluno.md)
-- [`docs/avaliacao.md`](docs/avaliacao.md)
-- [`docs/privacidade.md`](docs/privacidade.md)
-- [`docs/historico-do-ciclo.md`](docs/historico-do-ciclo.md)
-- [`projetos/missoes.md`](projetos/missoes.md)
-- [`projetos/portfolio.md`](projetos/portfolio.md)
+- [Metodologia](docs/metodologia.md)
+- [Estrutura do ciclo](docs/estrutura-do-ciclo.md)
+- [Roteiro adaptativo](docs/roteiro-de-aulas.md)
+- [Jornada do aluno](docs/jornada-do-aluno.md)
+- [Avaliação](docs/avaliacao.md)
+- [Privacidade](docs/privacidade.md)
+- [Histórico sanitizado](docs/historico-sanitizado.md)
+- [Acesso do professor](docs/acesso-do-professor.md)
 
-## Educador
+## 🔐 Privacidade
 
-Filipe G Morais  
-Áreas de atuação: informática, informática educacional, mídias digitais, design gráfico, educação, inclusão digital e formação para o trabalho.
+Este é um repositório público. Não publicar nomes identificáveis, contatos, documentos pessoais, credenciais, tokens, notas individuais, frequência individual identificável, diagnósticos pessoais ou fotografias identificáveis sem autorização adequada.
 
----
+Dados públicos devem ser agregados, anonimizados ou sanitizados.
+
+## 🔄 Princípio de atualização
+
+**O histórico informa.  
+O diagnóstico orienta.  
+A aula produz evidências.  
+A análise gera ajustes.  
+A nova evidência orienta o próximo passo.**
+
+## 👨‍🏫 Educador
+
+**Filipe G Morais** — informática, informática educacional, mídias digitais, design gráfico, educação, inclusão digital e formação para o trabalho.
 
 > **A tecnologia é o instrumento. A aprendizagem é o processo. A autonomia é um dos principais resultados.**

@@ -1,27 +1,21 @@
 # Roteiro adaptativo das 12 aulas
 
-Este documento define a estrutura do ciclo sem transformar o planejamento em uma sequência rígida.
-
 ## Estrutura padrão
 
 1. Objetivo
-2. Demonstração
-3. Prática guiada
-4. Missão prática
-5. Desafio opcional
-6. Reflexão
-7. Registro pedagógico
-8. Decisão sobre o próximo passo
+2. Competência
+3. Demonstração
+4. Prática guiada
+5. Missão prática
+6. Desafio
+7. Aplicação real
+8. Evidência de aprendizagem
+9. Reflexão
+10. Decisão sobre o próximo passo
 
-## Percurso inicial
+## Sequência de aprendizagem
 
-- **Aula 01:** apresentação, exploração livre e diagnóstico.
-- **Aula 02:** definida a partir das evidências da Aula 01.
-- **Aulas 03–12:** construídas progressivamente a partir do desenvolvimento da turma.
-
-Possíveis eixos: computador e periféricos, teclado e mouse, arquivos e pastas, internet, editor de texto, apresentações, planilhas, documentos para estudos e trabalho, segurança digital e projeto prático.
-
-Esses eixos são possibilidades, não uma obrigação de sequência.
+**Entenda → Veja → Faça → Tente → Aplique → Conclua**
 
 ## Regra de decisão
 
@@ -32,6 +26,10 @@ Esses eixos são possibilidades, não uma obrigação de sequência.
 **Observação = evidência**  
 **Ajuste = decisão pedagógica**
 
-## Progressão da autonomia
+## Transferência
 
-Não conhece → conhece com ajuda → executa com instruções → executa com pouca ajuda → executa sozinho → aplica em outra situação → explica ou ensina.
+Uma competência deve ser testada em situações diferentes sempre que possível. O objetivo é evitar que o educando apenas reproduza um roteiro.
+
+## Autonomia
+
+**Não conhece → conhece com ajuda → executa com instruções → executa com pouca ajuda → executa sozinho → aplica em outra situação → explica ou ensina.**

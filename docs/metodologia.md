@@ -2,15 +2,19 @@
 
 ## Princípio central
 
-O curso prioriza aprendizagem, autonomia e aplicação prática. O conteúdo é ajustado ao nível real da turma.
+O projeto prioriza aprendizagem, autonomia e aplicação prática. O conteúdo é ajustado ao nível real da turma e às evidências produzidas durante as atividades.
 
 ## Ciclo pedagógico
 
-**Planejamento → Execução → Observação → Análise → Ajuste → Nova aula**
+**Planejar → Executar → Observar → Analisar → Ajustar → Avançar**
 
-O cronograma é uma referência. A aprendizagem observada é a principal evidência para decidir o próximo passo.
+O cronograma é referência. A aprendizagem observada orienta o próximo passo.
 
-## Progressão
+## Estrutura de aprendizagem
+
+**Objetivo profissional → Competência → Ferramenta → Demonstração → Prática guiada → Desafio → Aplicação real → Evidência → Autonomia**
+
+## Progressão de autonomia
 
 1. Não conhece
 2. Conhece com ajuda
@@ -18,42 +22,31 @@ O cronograma é uma referência. A aprendizagem observada é a principal evidên
 4. Executa com pouca ajuda
 5. Executa sozinho
 6. Aplica em outra situação
-7. Consegue explicar ou ensinar
+7. Explica ou ensina
 
 ## Contextualização
 
-Sempre que possível:
-
-**Ferramenta → Tarefa → Finalidade → Situação real**
-
-## Princípios de acessibilidade
-
-- linguagem simples;
-- instruções curtas;
-- demonstração antes da prática;
-- passo a passo;
-- repetição significativa;
-- exemplos concretos;
-- progressão gradual;
-- acompanhamento individual.
+**Ferramenta → Habilidade → Tarefa → Finalidade → Situação real**
 
 ## Adaptação
 
-**Reforço:** mais demonstração, tarefas menores e repetição.
+**Reforço:** mais demonstração, tarefas menores e repetição significativa.
 
 **Padrão:** prática guiada e progressivamente autônoma.
 
-**Desafio:** maior autonomia, complexidade e aplicação em situações novas.
+**Desafio:** maior autonomia, complexidade e transferência para situações novas.
 
-## Objetivos de desenvolvimento
+## IA
 
-Autonomia · Confiança · Organização · Raciocínio · Comunicação · Inclusão Digital · Empregabilidade · Participação Social
+**Entender → Perguntar → Conferir → Adaptar → Assumir a autoria**
+
+A IA apoia aprendizagem e produtividade; não substitui compreensão, verificação ou autoria.
 
 ## Regra para cada novo ciclo
 
-Histórico = referência  
-Nova turma = diagnóstico  
+**Histórico = referência  
+Diagnóstico = evidência inicial  
 Planejamento = hipótese  
 Aula = experiência  
 Observação = evidência  
-Ajuste = decisão pedagógica
+Ajuste = decisão pedagógica**
