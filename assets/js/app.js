@@ -2,7 +2,7 @@ document.addEventListener('DOMContentLoaded',()=>{
   document.documentElement.classList.add('js');
 
   const script=document.querySelector('script[src*="assets/js/app.js"]');
-  const base=script?script.src.replace(/assets\/js\/app\.js(?:\?.*)?$/,''):'';
+  const base=script?script.src.replace(/assets\\/js\\/app\\.js(?:\\?.*)?$/,''):'';
   const polish=base+'assets/css/polish.css';
   if(!document.querySelector('link[data-ui-polish]')){
     const link=document.createElement('link');
@@ -11,6 +11,11 @@ document.addEventListener('DOMContentLoaded',()=>{
     link.href=polish;
     document.head.appendChild(link);
   }
+
+  const progressKey='26_Digital_Inclusion_progress_v2';
+  const readProgress=()=>{try{return JSON.parse(localStorage.getItem(progressKey)||'{}')}catch{return{}}};
+  const writeProgress=data=>{try{localStorage.setItem(progressKey,JSON.stringify(data))}catch{}};
+  const progress=readProgress();
 
   document.querySelectorAll('a[href^="#"]').forEach(a=>a.addEventListener('click',e=>{
     const id=a.getAttribute('href');
@@ -28,40 +33,76 @@ document.addEventListener('DOMContentLoaded',()=>{
     sections.forEach(section=>observer.observe(section));
   }
 
-  const progressKey='26_Digital_Inclusion_progress_v1';
-  const readProgress=()=>{try{return JSON.parse(localStorage.getItem(progressKey)||'{}')}catch{return{}}};
-  const writeProgress=data=>{try{localStorage.setItem(progressKey,JSON.stringify(data))}catch{}};
-  const cards=[...document.querySelectorAll('.lesson[href*="aula-"]')];
+  const lessons=[...document.querySelectorAll('.lesson[href*="aula-"]')];
+  const updateLessonCards=()=>lessons.forEach(card=>{
+    const id=card.dataset.lesson || card.getAttribute('href');
+    if(progress[id]?.visited){
+      card.classList.add('completed');
+      card.dataset.status='visitada';
+    }
+  });
+  updateLessonCards();
 
-  if(cards.length){
-    const progress=readProgress();
+  if(lessons.length){
     const panel=document.createElement('div');
-    panel.className='callout';
+    panel.className='learning-dashboard';
     panel.id='learning-progress';
-    const updatePanel=(flash=false)=>{
-      const done=cards.filter(card=>progress[card.getAttribute('href')]).length;
-      const pct=Math.round((done/cards.length)*100);
-      panel.innerHTML=`<strong>Seu progresso:</strong> ${done} de ${cards.length} aulas visitadas · ${pct}%<br><small>Registro local deste dispositivo; nenhum dado é enviado ao servidor.</small>`;
-      if(flash){
-        panel.classList.remove('updated');
-        requestAnimationFrame(()=>panel.classList.add('updated'));
-        window.setTimeout(()=>panel.classList.remove('updated'),700);
-      }
+    const render=()=>{
+      const done=lessons.filter(l=>progress[l.dataset.lesson||l.getAttribute('href')]?.completed).length;
+      const visited=lessons.filter(l=>progress[l.dataset.lesson||l.getAttribute('href')]?.visited).length;
+      const pct=Math.round((done/lessons.length)*100);
+      panel.innerHTML=
+        '<div class="dashboard-copy"><span class="eyebrow dark-eyebrow">MEU PROGRESSO</span>'+
+        '<strong>'+done+' de '+lessons.length+' aulas concluídas</strong>'+\n        '<small>'+visited+' aula(s) visitada(s) · registro local deste dispositivo</small></div>'+
+        '<div class="dashboard-meter" aria-label="Progresso das aulas"><span style="width:'+pct+'%"></span></div>';
     };
-    updatePanel();
-    const grid=cards[0].parentElement;
-    if(grid&&grid.parentElement)grid.parentElement.insertBefore(panel,grid);
+    render();
+    const grid=lessons[0]?.parentElement;
+    if(grid?.parentElement)grid.parentElement.insertBefore(panel,grid);
 
-    cards.forEach(card=>{
-      const href=card.getAttribute('href');
-      if(progress[href])card.classList.add('completed');
-      card.addEventListener('click',()=>{
-        progress[href]=new Date().toISOString();
-        writeProgress(progress);
-        card.classList.add('completed');
-        updatePanel(true);
-      });
-      card.addEventListener('keydown',e=>{if(e.key==='Enter'||e.key===' '){e.preventDefault();card.click()}});
+    lessons.forEach(card=>{
+      const id=card.dataset.lesson||card.getAttribute('href');
+      card.addEventListener('click',()=>{progress[id]={...(progress[id]||{}),visited:new Date().toISOString()};writeProgress(progress);card.classList.add('completed');render();});
     });
+  }
+
+  document.querySelectorAll('[data-complete-lesson]').forEach(button=>button.addEventListener('click',()=>{
+    const id=button.dataset.completeLesson;
+    progress[id]={...(progress[id]||{}),visited:progress[id]?.visited||new Date().toISOString(),completed:new Date().toISOString()};
+    writeProgress(progress);
+    button.classList.add('is-done');
+    button.textContent='✓ Aula concluída';
+    const status=document.querySelector('[data-lesson-status]');
+    if(status){status.textContent='Concluída';status.classList.add('success');}
+    window.dispatchEvent(new CustomEvent('learning-progress-updated',{detail:{id}}));
+  }));
+
+  document.querySelectorAll('[data-quiz]').forEach(quiz=>{
+    quiz.querySelectorAll('[data-answer]').forEach(option=>option.addEventListener('click',()=>{
+      const expected=quiz.dataset.quiz;
+      const actual=option.dataset.answer;
+      const feedback=quiz.querySelector('[data-feedback]');
+      const correct=actual===expected;
+      quiz.querySelectorAll('[data-answer]').forEach(o=>o.classList.remove('selected','correct','wrong'));
+      option.classList.add('selected',correct?'correct':'wrong');
+      if(feedback){feedback.textContent=correct?'Muito bem. Você conseguiu.':'Vamos tentar novamente. Pense na ação antes de clicar.';feedback.className='quiz-feedback '+(correct?'success':'help');}
+      if(correct){quiz.dataset.completed='true';}
+    }));
+  });
+
+  document.querySelectorAll('[data-checklist]').forEach(list=>{
+    const id=list.dataset.checklist;
+    list.querySelectorAll('input[type="checkbox"]').forEach(box=>box.addEventListener('change',()=>{
+      const all=[...list.querySelectorAll('input[type="checkbox"]')];
+      const done=all.length>0&&all.every(x=>x.checked);
+      const status=list.querySelector('[data-check-status]');
+      if(status)status.textContent=done?'✓ Concluído':'Continue praticando';
+      if(done){progress[id]={completed:new Date().toISOString()};writeProgress(progress);list.classList.add('completed');}
+    }));
+  });
+
+  if('IntersectionObserver' in window){
+    const reveal=new IntersectionObserver(entries=>entries.forEach(e=>{if(e.isIntersecting){e.target.classList.add('is-visible');reveal.unobserve(e.target);}}),{threshold:.12});
+    document.querySelectorAll('.reveal').forEach(el=>reveal.observe(el));
   }
 });
