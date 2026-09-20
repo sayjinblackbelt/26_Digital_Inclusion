@@ -53,7 +53,8 @@ document.addEventListener('DOMContentLoaded',()=>{
       const pct=Math.round((done/lessons.length)*100);
       panel.innerHTML=
         '<div class="dashboard-copy"><span class="eyebrow dark-eyebrow">MEU PROGRESSO</span>'+
-        '<strong>'+done+' de '+lessons.length+' aulas concluídas</strong>'+\n        '<small>'+visited+' aula(s) visitada(s) · registro local deste dispositivo</small></div>'+
+        '<strong>'+done+' de '+lessons.length+' aulas concluídas</strong>'+
+        '<small>'+visited+' aula(s) visitada(s) · registro local deste dispositivo</small></div>'+
         '<div class="dashboard-meter" aria-label="Progresso das aulas"><span style="width:'+pct+'%"></span></div>';
     };
     render();
